@@ -1,7 +1,25 @@
-import { Pais } from "./pais.domain";
-
+import { Pais, PaisSchema } from "./pais.domain";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import * as mongoose from "mongoose";
 export class Aluno {
-
-    constructor(public readonly nome: string, public readonly pais: Pais){
+    
+    public codigoAluno: number;
+    public nome: string;
+    public pais: Pais;
+    
+    // @Prop([String])
+    // public observacoes: string[];
+    
+    // public links: Link[];
+    
+    constructor(nome: string, pais: Pais){
+        this.nome = nome;
+        this.pais = pais;
     }
 }
+
+export const AlunoSchema = new mongoose.Schema({
+    codigoAluno: Number,
+    nome: String,
+    pais: { type: mongoose.Schema.ObjectId, ref: Pais.name }
+});

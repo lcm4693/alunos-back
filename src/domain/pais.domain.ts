@@ -1,5 +1,16 @@
-export class Pais {
+import { Document } from "mongoose";
+import { Schema, Prop, SchemaFactory } from "@nestjs/mongoose";
+import * as mongoose from "mongoose";
 
-    constructor(public readonly codigo: number, public readonly nome: string){
+export class Pais {
+    public codigo: number;
+    public nome: string;
+
+    constructor(nomePais: string){
+        this.nome = nomePais;
     }
 }
+export const PaisSchema = new mongoose.Schema({
+    codigo: Number,
+    nome: String,
+});

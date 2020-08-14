@@ -1,5 +1,5 @@
 export class EntradaAluno {
 
-    constructor(public readonly nome: string, public readonly pais: string){
+    constructor(public readonly codigoAluno, public readonly nome: string, public readonly pais: string){
     }
 }
