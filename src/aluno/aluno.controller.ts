@@ -18,18 +18,23 @@ export class AlunoController {
   }
 
   @Post('/observacao/criar')
-  criarObservacao(@Body('codigoAluno') codigoAluno: number, @Body('observacao') observacao: string) {
-    return this.alunoService.criarObservacao(codigoAluno, observacao);
+  criarObservacao(@Body('codigoAluno') codigoAluno: string, @Body('observacoes') observacoes: string[]) {
+    return this.alunoService.criarObservacoes(codigoAluno, observacoes);
+  }
+
+  @Post('/interesse/criar')
+  criarInteresse(@Body('codigoAluno') codigoAluno: string, @Body('interesses') interesses: string[]) {
+    return this.alunoService.criarInteresses(codigoAluno, interesses);
   }
   
   @Get('/codigo/:codigoAluno')
-  buscarAlunoPorCodigo(@Param('codigoAluno') codigoAluno: number): Aluno {
+  async buscarAlunoPorCodigo(@Param('codigoAluno') codigoAluno: string): Promise<Aluno> {
     return this.alunoService.buscarAlunoPorCodigo(codigoAluno);
   }
 
   @Get('/:nomeAluno')
-  buscarAluno(@Param('nomeAluno') nomeAluno): Aluno[] {
-    return this.alunoService.buscarAluno(nomeAluno);
+  async buscarAluno(@Param('nomeAluno') nomeAluno): Promise<Aluno[]> {
+    return this.alunoService.buscarAlunos(nomeAluno);
   }
 
 }

@@ -6,91 +6,53 @@ import { LinkService } from '../link/link.service';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { PaisService } from 'src/pais/pais.service';
+import { EntradaPais } from 'src/dto/entrada-pais.dto';
+import { AlunoRepository } from './aluno.repository';
 
 @Injectable()
 export class AlunoService {
-  private alunos = new Array();
-
   constructor(
-    @InjectModel(Aluno.name) private readonly alunoModel: Model<Aluno>,
-    @InjectModel(Pais.name) private readonly paisModel: Model<Pais>,
-    private readonly linkService: LinkService,
     private readonly paisService: PaisService,
-  ) {
-    // const aluno = new Aluno('Maciej', new Pais(1, 'Polônia'));
-    // const aluno2 = new Aluno('Klaidas', new Pais(2, 'Lituânia'));
+    private readonly alunoRepository: AlunoRepository,
+  ) {}
 
-    // aluno.codigoAluno = 1;
-    // aluno2.codigoAluno = 2;
-    this.getAll();
-    // aluno.links = linkService.getAll();
-
-    // this.alunos.push(aluno);
-    // this.alunos.push(aluno2);
+  async buscarAlunos(nomeAluno: string): Promise<Aluno[]> {
+    const alunos: Aluno[] = await this.alunoRepository.buscarAlunos(nomeAluno);
+    return alunos;
   }
 
-  buscarAluno(nomeAluno: string): Aluno[] {
-    let retorno: Aluno[] = new Array();
-
-    for (const value of this.alunos) {
-      if (value.nome.toUpperCase().startsWith(nomeAluno.toUpperCase())) {
-        retorno.push(value);
-      }
-    }
-
-    if (retorno.length === 0) {
-      throw new NotFoundException(nomeAluno);
-    }
-
-    return retorno;
+  async buscarAlunoPorCodigo(codigoAluno: string): Promise<Aluno> {
+    const aluno = await this.alunoRepository.buscarAlunoPorCodigo(codigoAluno);
+    return aluno;
   }
 
-  buscarAlunoPorCodigo(codigoAluno: number): Aluno {
-    for (const value of this.alunos) {
-      if (value.codigoAluno == codigoAluno) {
-        return value;
-      }
-    }
-
-    throw new NotFoundException(codigoAluno);
+  async criarObservacoes(
+    codigoAluno: string,
+    observacoes: string[],
+  ): Promise<void> {
+    await this.alunoRepository.criarObservacoes(codigoAluno, observacoes);
   }
 
-  criarObservacao(codigoAluno: number, observacao: string): void {
-    const aluno = this.buscarAlunoPorCodigo(codigoAluno);
-
-    if (!aluno) {
-      throw new NotFoundException('Aluno ' + codigoAluno + ' não encontrado');
-    }
-
-    // if(!aluno.observacoes){
-    //   aluno.observacoes = new Array();
-    // }
-
-    // aluno.observacoes.push(observacao);
+  async criarInteresses(
+    codigoAluno: string,
+    interesses: string[],
+  ): Promise<void> {
+    await this.alunoRepository.criarInteresses(codigoAluno, interesses);
   }
 
   async insert(alunoEntrada: EntradaAluno): Promise<Aluno> {
-    // const man = new this.paisModel(new Pais(alunoEntrada.pais));
-    // const pais = await man.save();
+    const pais = await this.paisService.buscarPaisPorNome(alunoEntrada.pais);
 
-    const pais = await this.paisService.find(alunoEntrada.pais);
+    if (!pais) {
+      throw new NotFoundException('País não encontrado');
+    }
 
     const aluno = new Aluno(alunoEntrada.nome, pais);
-
-    aluno.codigoAluno = this.alunos.length + 1;
-
-    const managed = new this.alunoModel(aluno);
-    this.alunos.push(aluno);
-    return managed.save();
+    return this.alunoRepository.insertOrUpdate(aluno);
   }
 
   async getAll(): Promise<Aluno[]> {
-    this.alunos = await this.alunoModel.find().exec();
-
-    for(const aluno of this.alunos){
-      const pais = await this.paisService.findById(aluno.pais);
-      aluno.pais = pais;
-    }
-    return this.alunos;
+    const alunos = await this.alunoRepository.getAll();
+    return alunos;
   }
 }

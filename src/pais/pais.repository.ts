@@ -1,0 +1,39 @@
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Pais } from 'src/domain/pais.domain';
+import { Model } from 'mongoose';
+import { EntradaPais } from 'src/dto/entrada-pais.dto';
+
+@Injectable()
+export class PaisRepository {
+  constructor(
+    @InjectModel(Pais.name) private readonly paisModel: Model<Pais>,
+  ) {}
+
+  async findById(id: string): Promise<Pais> {
+    const pais = await this.paisModel.findById(id).exec();
+    return pais;
+  }
+
+  async findOne(nomePais: string, nomeEnglish?: string, nomeFrench?: string): Promise<Pais> {
+    return this.paisModel.findOne({ nome: nomePais }).exec();
+  }
+
+  async findByPartialName(nomePaisParcial: string): Promise<Pais[]> {
+    const expressao = new RegExp(nomePaisParcial, 'i');
+    const pais: Pais[] = await this.paisModel
+      .find({ $or: [{nome: expressao}, {nameEnglish: expressao}, {nameFrench: expressao}]})
+      .exec();
+    return pais;
+  }
+
+  async insert(entradaPais: EntradaPais): Promise<Pais> {
+    const managed = new this.paisModel(new Pais(entradaPais.nomePais, entradaPais.nameEnglish, entradaPais.nameFrench));
+    return await managed.save();
+  }
+
+  async getAll(): Promise<Pais[]> {
+    return await this.paisModel.find().exec();
+  }
+
+}

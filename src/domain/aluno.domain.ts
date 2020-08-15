@@ -6,10 +6,9 @@ export class Aluno {
     public codigoAluno: number;
     public nome: string;
     public pais: Pais;
-    
-    // @Prop([String])
-    // public observacoes: string[];
-    
+    public observacoes: string[];
+    public interesses: string[];
+
     // public links: Link[];
     
     constructor(nome: string, pais: Pais){
@@ -21,5 +20,7 @@ export class Aluno {
 export const AlunoSchema = new mongoose.Schema({
     codigoAluno: Number,
     nome: String,
-    pais: { type: mongoose.Schema.ObjectId, ref: Pais.name }
+    pais: { type: mongoose.Schema.ObjectId, ref: Pais.name },
+    observacoes: [String],
+    interesses: [String]
 });

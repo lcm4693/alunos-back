@@ -9,6 +9,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AlunoSchema, Aluno } from './domain/aluno.domain';
 import { PaisSchema, Pais } from './domain/pais.domain';
 import { PaisService } from './pais/pais.service';
+import { PaisController } from './pais/pais.controller';
+import { PaisRepository } from './pais/pais.repository';
+import { AlunoRepository } from './aluno/aluno.repository';
 
 @Module({
   imports: [
@@ -18,7 +21,7 @@ import { PaisService } from './pais/pais.service';
       { name: Pais.name, schema: PaisSchema },
     ]),
   ],
-  controllers: [AppController, AlunoController, LinkController],
-  providers: [AppService, AlunoService, LinkService, PaisService],
+  controllers: [AppController, AlunoController, LinkController, PaisController],
+  providers: [AppService, AlunoService, LinkService, PaisService, AlunoRepository, PaisRepository],
 })
 export class AppModule {}

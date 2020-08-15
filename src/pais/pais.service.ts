@@ -1,58 +1,60 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Aluno, AlunoSchema } from '../domain/aluno.domain';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+} from '@nestjs/common';
 import { Pais } from '../domain/pais.domain';
-import { EntradaAluno } from '../dto/entrada-aluno.dto';
-import { LinkService } from '../link/link.service';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { EntradaPais } from 'src/dto/entrada-pais.dto';
+import { PaisRepository } from './pais.repository';
 
 @Injectable()
 export class PaisService {
-  
-  private alunos = new Array();
+  constructor(private readonly paisRepository: PaisRepository) {}
 
-  constructor(@InjectModel(Pais.name) private readonly paisModel: Model<Pais>){}
+  async buscarPaisPorId(id: string): Promise<Pais> {
+    const pais = await this.paisRepository.findById(id);
 
-//   buscarAluno(nomeAluno: string): Aluno[] {
-//     let retorno: Aluno[] = new Array();
-    
-//     for(const value of this.alunos){
-//       if(value.nome.toUpperCase().startsWith(nomeAluno.toUpperCase())){
-//         retorno.push(value);
-//       }
-//     }
-
-//     if(retorno.length === 0){
-//       throw new NotFoundException(nomeAluno);
-//     }
-   
-//     return retorno;
-//   }
-
-  async findById(id: string): Promise<Pais> {
-
-    const pais = await this.paisModel.findById(id).exec();
-
-    if(!pais){
-        throw new NotFoundException('País não encontrado');
+    if (!pais) {
+      throw new NotFoundException('País não encontrado');
     }
 
     return pais;
   }
 
-  async find(nomePais: string): Promise<Pais> {
-
-    let pais = await this.paisModel.findOne({nome: nomePais}).exec();
-
-    if(!pais){
-        this.insert(nomePais);
-    }
-
+  async buscarPaisPorNome(nomePais: string): Promise<Pais> {
+    const pais = this.paisRepository.findOne(nomePais);
     return pais;
   }
 
-  async insert(nomePais: string): Promise<Pais> {
-    const managed = new this.paisModel(new Pais(nomePais));
-    return await managed.save();
+  async buscarPaisesPorNomeParcial(nomePaisParcial: string): Promise<Pais[]> {
+    if (nomePaisParcial && nomePaisParcial.length < 3) {
+      throw new ForbiddenException(
+        'O nome do país precisa ter, no mínimo, 3 letras',
+      );
+    }
+
+    const pais: Pais[] = await this.paisRepository.findByPartialName(
+      nomePaisParcial,
+    );
+    return pais;
+  }
+
+  async inserir(entradaPais: EntradaPais): Promise<Pais> {
+    const paisJaCadastrado = await this.paisRepository.findOne(
+      entradaPais.nomePais,
+      entradaPais.nameEnglish,
+      entradaPais.nameFrench,
+    );
+
+    if (paisJaCadastrado) {
+      throw new ForbiddenException('Objeto já existe na base');
+    }
+
+    const paisInserido = await this.paisRepository.insert(entradaPais);
+    return paisInserido;
+  }
+
+  async getAll(): Promise<Pais[]> {
+    return await this.paisRepository.getAll();
   }
 }
