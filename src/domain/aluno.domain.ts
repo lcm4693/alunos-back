@@ -3,6 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from "mongoose";
 export class Aluno {
     
+    public _id: string;
     public codigoAluno: number;
     public nome: string;
     public pais: Pais;

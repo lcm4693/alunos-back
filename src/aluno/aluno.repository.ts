@@ -85,6 +85,12 @@ export class AlunoRepository {
     return managed.save();
   }
 
+  async delete(codigoAluno: string): Promise<Number> {
+    const aluno = await this.buscarAlunoPorCodigo(codigoAluno);
+    const managed = new this.alunoModel(aluno);
+    return managed.remove() ? 1 : 0;
+  }
+
   async getAll(): Promise<Aluno[]> {
     let alunos = await this.alunoModel.find().exec();
     alunos = await this.montarObjetoAluno(alunos);

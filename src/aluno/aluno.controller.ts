@@ -17,6 +17,12 @@ export class AlunoController {
     return this.alunoService.insert(aluno);
   }
 
+  @Get('/remover/:codigoAluno')
+  async removerAluno(@Param('codigoAluno') codigo): Promise<Number> {
+    const numero = await this.alunoService.delete(codigo);
+    return numero;
+  }
+
   @Post('/observacao/criar')
   criarObservacao(@Body('codigoAluno') codigoAluno: string, @Body('observacoes') observacoes: string[]) {
     return this.alunoService.criarObservacoes(codigoAluno, observacoes);

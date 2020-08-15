@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { Aluno, AlunoSchema } from '../domain/aluno.domain';
 import { Pais } from '../domain/pais.domain';
 import { EntradaAluno } from '../dto/entrada-aluno.dto';
@@ -49,6 +49,14 @@ export class AlunoService {
 
     const aluno = new Aluno(alunoEntrada.nome, pais);
     return this.alunoRepository.insertOrUpdate(aluno);
+  }
+
+  async delete(codigoAluno: string): Promise<Number> {
+    const numeroRemovidos = await this.alunoRepository.delete(codigoAluno);
+    if(numeroRemovidos < 1){
+      throw new ForbiddenException('Aluno ' + codigoAluno + ' não encontrado');
+    }
+    return numeroRemovidos;
   }
 
   async getAll(): Promise<Aluno[]> {
