@@ -13,6 +13,8 @@ import { PaisController } from './pais/pais.controller';
 import { PaisRepository } from './pais/pais.repository';
 import { AlunoRepository } from './aluno/aluno.repository';
 import { UserController } from './user/user.controller';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 const enderecoMongo = '18.231.171.153';
 // const enderecoMongo = "192.168.0.2";
@@ -23,6 +25,8 @@ const enderecoMongo = '18.231.171.153';
       { name: Aluno.name, schema: AlunoSchema },
       { name: Pais.name, schema: PaisSchema },
     ]),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController, AlunoController, LinkController, PaisController, UserController],
   providers: [

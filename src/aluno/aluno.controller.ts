@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { JwtAuthGuard } from './../auth/jwt-auth.guard';
+import { Controller, Get, Post, Body, Param, UseGuards, Request } from '@nestjs/common';
 import { AlunoService } from './aluno.service';
 import { EntradaAluno } from '../dto/entrada-aluno.dto';
 import { Aluno } from '../domain/aluno.domain';
@@ -7,6 +8,7 @@ import { Aluno } from '../domain/aluno.domain';
 export class AlunoController {
   constructor(private readonly alunoService: AlunoService) {}
   
+  @UseGuards(JwtAuthGuard)
   @Get('/alunos')
   getAlunos() {
     return this.alunoService.getAll();

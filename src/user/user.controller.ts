@@ -1,30 +1,31 @@
+import { JwtAuthGuard } from './../auth/jwt-auth.guard';
+import { AuthService } from './../auth/auth.service';
+import { LocalAuthGuard } from './../auth/local-auth.guard';
 import { User } from './../domain/user.domain';
-import { Controller, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UnauthorizedException,
+  UseGuards,
+  Request,
+  Get,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 export class UserController {
+  constructor(private authService: AuthService) {}
 
-    @Post('/authenticate')
-    criar(@Body('username') login: string, @Body('password') password: string): User {
-    //   const retorno = await this.paisService.inserir(pais);
-    //   return retorno;
+  @UseGuards(LocalAuthGuard)
+  @Post('/authenticate')
+  criar(@Request() req): Promise<User> {
+    return this.authService.login(req.user);
+  }
 
-        console.log(login);
-        console.log(password);
-
-        if(!login || !password || password !== '12345'){
-            return;
-        }
-
-        console.log('Passou========');
-
-        const user = new User();
-        user.firstName = 'User 1';
-        user.lastName = 'Sobrenome';
-        user.password = password;
-        user.token = 'EWTHSKADJKS';
-        user.username = login;
-
-        return user;
-    }
+  @UseGuards(JwtAuthGuard)
+  @Get('/profile')
+  getProfile(@Request() req) {
+    return req.user;
+  }
 }
