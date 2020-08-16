@@ -16,7 +16,7 @@ export class PaisRepository {
   }
 
   async findOne(nomePais: string, nomeEnglish?: string, nomeFrench?: string): Promise<Pais> {
-    return this.paisModel.findOne({ nome: nomePais }).exec();
+    return this.paisModel.findOne({ $or: [{nome: nomePais}, {nameEnglish: nomePais}, {nameEnglish: nomeEnglish}, {nameFrench: nomePais}, {nameFrench: nomeFrench}] }).exec();
   }
 
   async findByPartialName(nomePaisParcial: string): Promise<Pais[]> {
@@ -28,7 +28,7 @@ export class PaisRepository {
   }
 
   async insert(entradaPais: EntradaPais): Promise<Pais> {
-    const managed = new this.paisModel(new Pais(entradaPais.nomePais, entradaPais.nameEnglish, entradaPais.nameFrench));
+    const managed = new this.paisModel(new Pais(entradaPais.nomePais, entradaPais.nameEnglish, entradaPais.nameFrench, entradaPais.flag));
     return await managed.save();
   }
 

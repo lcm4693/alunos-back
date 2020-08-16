@@ -19,6 +19,7 @@ export class PaisController {
 
   @Post('/criar')
   async criar(@Body() pais: EntradaPais) {
-    return await this.paisService.inserir(pais);
+    const retorno = await this.paisService.inserir(pais);
+    return retorno;
   }
 }

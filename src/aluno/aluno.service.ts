@@ -41,7 +41,7 @@ export class AlunoService {
   }
 
   async insert(alunoEntrada: EntradaAluno): Promise<Aluno> {
-    const pais = await this.paisService.buscarPaisPorNome(alunoEntrada.pais);
+    const pais = await this.paisService.buscarPaisPorId(alunoEntrada.pais._id);
 
     if (!pais) {
       throw new NotFoundException('País não encontrado');

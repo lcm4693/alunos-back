@@ -12,16 +12,26 @@ import { PaisService } from './pais/pais.service';
 import { PaisController } from './pais/pais.controller';
 import { PaisRepository } from './pais/pais.repository';
 import { AlunoRepository } from './aluno/aluno.repository';
+import { UserController } from './user/user.controller';
 
+const enderecoMongo = '18.231.171.153';
+// const enderecoMongo = "192.168.0.2";
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://192.168.0.2/aluno-controle'),
+    MongooseModule.forRoot('mongodb://' + enderecoMongo + ':27020/aluno-controle'),
     MongooseModule.forFeature([
       { name: Aluno.name, schema: AlunoSchema },
       { name: Pais.name, schema: PaisSchema },
     ]),
   ],
-  controllers: [AppController, AlunoController, LinkController, PaisController],
-  providers: [AppService, AlunoService, LinkService, PaisService, AlunoRepository, PaisRepository],
+  controllers: [AppController, AlunoController, LinkController, PaisController, UserController],
+  providers: [
+    AppService,
+    AlunoService,
+    LinkService,
+    PaisService,
+    AlunoRepository,
+    PaisRepository,
+  ],
 })
 export class AppModule {}
