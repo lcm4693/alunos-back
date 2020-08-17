@@ -3,7 +3,7 @@ import {
   NotFoundException,
   ForbiddenException,
 } from '@nestjs/common';
-import { Pais } from '../domain/pais.domain';
+import { Pais } from '../../domain/pais.domain';
 import { EntradaPais } from 'src/dto/entrada-pais.dto';
 import { PaisRepository } from './pais.repository';
 

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Pais } from 'src/domain/pais.domain';
+import { Pais } from './../../domain/pais.domain';
 import { Model } from 'mongoose';
-import { EntradaPais } from 'src/dto/entrada-pais.dto';
+import { EntradaPais } from './../../dto/entrada-pais.dto';
 
 @Injectable()
 export class PaisRepository {

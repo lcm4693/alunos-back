@@ -1,11 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Aluno, AlunoSchema } from '../domain/aluno.domain';
-import { Pais } from '../domain/pais.domain';
-import { EntradaAluno } from '../dto/entrada-aluno.dto';
-import { LinkService } from '../link/link.service';
+import { Aluno, AlunoSchema } from '../../domain/aluno.domain';
+import { Pais } from '../../domain/pais.domain';
+import { EntradaAluno } from '../../dto/entrada-aluno.dto';
+import { LinkService } from '../../link/link.service';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { PaisService } from 'src/pais/pais.service';
+import { PaisService } from 'src/modules/pais/pais.service';
 import { EntradaPais } from 'src/dto/entrada-pais.dto';
 import { AlunoService } from './aluno.service';
 
