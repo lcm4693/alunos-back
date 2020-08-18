@@ -47,7 +47,7 @@ export class PaisService {
     );
 
     if (paisJaCadastrado) {
-      throw new ForbiddenException('Objeto já existe na base');
+      throw new ForbiddenException('Esse país já existe na base');
     }
 
     const paisInserido = await this.paisRepository.insert(entradaPais);

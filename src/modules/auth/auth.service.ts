@@ -1,7 +1,9 @@
-import { User } from '../../domain/user.domain';
-import { Injectable, UnauthorizedException, NotFoundException } from '@nestjs/common';
+import { Roles } from './../../roles.decorator';
+import { User } from './../../domain/user.domain';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
+import { RolesSystem } from 'src/constants/roles-system';
 
 @Injectable()
 export class AuthService {
@@ -22,13 +24,14 @@ export class AuthService {
     const payload = { username: user.username, sub: user.id };
     const access_token = this.jwtService.sign(payload);
     
-    const novoUser = new User();
-    novoUser.id = user.id;
-    novoUser.firstName = user.firstName;
-    novoUser.lastName = user.lastName;
-    novoUser.username = user.username
+    const novoUser = User.converterUserSchematoUser(user);
     novoUser.access_token = access_token;
-
+    
     return novoUser;
+  }
+
+  getAll(): string[] {
+    const roles = RolesSystem.getValores();
+    return roles;
   }
 }

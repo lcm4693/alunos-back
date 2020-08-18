@@ -11,15 +11,37 @@ export class UsersRepository {
 
   async insert(user: User): Promise<User> {
     const managed = new this.userModel(user);
-    return await managed.save();
+    return this.converterUserSchemaToUser(await managed.save());
+  }
+
+  async findByUsername(username: string): Promise<User> {
+    const user = await this.userModel.findOne({ username }).exec();
+    return this.converterUserSchemaToUser(user);
   }
 
   async findOne(username: string, password: string): Promise<User> {
-    return this.userModel.findOne({ $and: [{username: username}, {password: password}] }).exec();
+    return this.converterUserSchemaToUser(
+      await this.userModel
+        .findOne({ $and: [{ username: username }, { password: password }] })
+        .exec(),
+    );
   }
 
   async getAll(): Promise<User[]> {
-    return await this.userModel.find().exec();
+    return await this.converterUserSchemaToUsers(
+      await this.userModel.find().exec(),
+    );
   }
 
+  private converterUserSchemaToUser(value: User): User {
+    return User.converterUserSchematoUser(value);
+  }
+
+  private async converterUserSchemaToUsers(value: User[]): Promise<User[]> {
+    let retorno = [];
+    for (const user of value) {
+      retorno.push(User.converterUserSchematoUser(user));
+    }
+    return retorno;
+  }
 }
