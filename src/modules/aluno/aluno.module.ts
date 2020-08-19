@@ -7,12 +7,14 @@ import { AlunoService } from './aluno.service';
 import { AlunoRepository } from './aluno.repository';
 import { PaisRepository } from 'src/modules/pais/pais.repository';
 import { PaisModule } from 'src/modules/pais/pais.module';
+import { UsersModule } from '../users/users.module';
 @Module({
   imports: [
     MongooseModule.forFeature([
         { name: Aluno.name, schema: AlunoSchema },
     ]),
     PaisModule,
+    UsersModule,
   ],
   controllers: [AlunoController],
   providers: [AlunoService, AlunoRepository],

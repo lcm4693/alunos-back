@@ -1,13 +1,16 @@
+import { User } from './../../domain/user.domain';
 import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { Aluno, AlunoSchema } from '../../domain/aluno.domain';
 import { EntradaAluno } from '../../dto/entrada-aluno.dto';
 import { PaisService } from './../../modules/pais/pais.service';
 import { AlunoRepository } from './aluno.repository';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AlunoService {
   constructor(
     private readonly paisService: PaisService,
+    private readonly userService: UsersService,
     private readonly alunoRepository: AlunoRepository,
   ) {}
 
@@ -42,7 +45,10 @@ export class AlunoService {
       throw new NotFoundException('País não encontrado');
     }
 
-    const aluno = new Aluno(alunoEntrada.nome, pais);
+    const professor = await this.userService.findByUsername(alunoEntrada.professor.username);
+
+    const aluno = new Aluno(alunoEntrada.nome, pais, professor);
+    
     return this.alunoRepository.insertOrUpdate(aluno);
   }
 
@@ -54,8 +60,8 @@ export class AlunoService {
     return numeroRemovidos;
   }
 
-  async getAll(): Promise<Aluno[]> {
-    const alunos = await this.alunoRepository.getAll();
+  async getAll(professor: User): Promise<Aluno[]> {
+    const alunos = await this.alunoRepository.getAll(professor);
     return alunos;
   }
 }

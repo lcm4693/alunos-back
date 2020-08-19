@@ -16,13 +16,12 @@ export class User {
       return undefined;
     }
     const user = new User();
-    user.id = userSchema.id;
+    user.id = userSchema._id;
     user.firstName = userSchema.firstName;
     user.lastName = userSchema.lastName;
     user.username = userSchema.username;
     // user.password = userSchema.password;
     user.roles = userSchema.roles;
-
     return user;
   }
 
@@ -42,6 +41,7 @@ export class User {
 }
 
 export const UserSchema = new mongoose.Schema({
+  id: String,
   username: String,
   password: String,
   firstName: String,

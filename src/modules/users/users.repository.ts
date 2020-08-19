@@ -16,7 +16,9 @@ export class UsersRepository {
 
   async findByUsername(username: string): Promise<User> {
     const user = await this.userModel.findOne({ username }).exec();
-    return this.converterUserSchemaToUser(user);
+    
+    return user;
+    // return this.converterUserSchemaToUser(user);
   }
 
   async findOne(username: string, password: string): Promise<User> {

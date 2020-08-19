@@ -17,6 +17,11 @@ export class UsersService {
     }
 
     const user = User.converterEntradaUsertoUser(entradaUser);
+
+    if(!user.roles){
+      user.roles = [RolesSystem.ALUNO];
+    }
+
     const userInserido = await this.service.insert(user);
     return userInserido;
   }

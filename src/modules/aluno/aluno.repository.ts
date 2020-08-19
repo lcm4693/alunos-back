@@ -1,3 +1,4 @@
+import { User } from './../../domain/user.domain';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Aluno, AlunoSchema } from '../../domain/aluno.domain';
 import { Pais } from '../../domain/pais.domain';
@@ -91,8 +92,8 @@ export class AlunoRepository {
     return managed.remove() ? 1 : 0;
   }
 
-  async getAll(): Promise<Aluno[]> {
-    let alunos = await this.alunoModel.find().exec();
+  async getAll(professor: User): Promise<Aluno[]> {
+    let alunos = await this.alunoModel.find({ professor }).exec();
     alunos = await this.montarObjetoAluno(alunos);
 
     return alunos;
