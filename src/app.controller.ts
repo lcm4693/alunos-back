@@ -1,5 +1,6 @@
-import { Controller, Get, UseGuards, Request, Post } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 
 @Controller()
 export class AppController {
+  constructor() {}
 }

@@ -8,6 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { PaisModule } from './modules/pais/pais.module';
+import { CalendarModule } from './modules/calendar/calendar.module';
 
 // const enderecoMongo = '18.231.171.153:27020';
 const enderecoMongo = '192.168.0.2';
@@ -18,6 +19,7 @@ const enderecoMongo = '192.168.0.2';
     AlunoModule,
     UsersModule,
     PaisModule,
+    CalendarModule,
   ],
   controllers: [AppController, LinkController],
   providers: [LinkService],
