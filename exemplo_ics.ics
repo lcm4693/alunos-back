@@ -1,0 +1,148 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//My italki calendar////
+X-WR-CALDESC:Italki Lessons
+X-WR-CALNAME:Italki Lessons
+BEGIN:VEVENT
+SUMMARY:italki Lesson: english - English with Emile
+DTSTART;VALUE=DATE-TIME:20200819T210000Z
+DTEND;VALUE=DATE-TIME:20200819T220000Z
+DTSTAMP;VALUE=DATE-TIME:20200819T133612Z
+UID:ITALKI_SESSION_2846132908
+DESCRIPTION:Session ID: 2846132908\nCourse /Service: You're such a Chatter
+ box!\nTeacher: English with Emile (https://www.italki.com/teacher/1431559)
+ \nSkype: mle_pho\nURL: https://www.italki.com/lesson/session/2846132908
+LOCATION:italki.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:italki Lesson: portuguese - josecarlos10301
+DTSTART;VALUE=DATE-TIME:20200820T113000Z
+DTEND;VALUE=DATE-TIME:20200820T123000Z
+DTSTAMP;VALUE=DATE-TIME:20200819T133612Z
+UID:ITALKI_SESSION_2911119418
+DESCRIPTION:Session ID: 2911119418\nCourse /Service: Prática de Conversa
+ ção em Português Brasileiro.\nStudent: josecarlos10301 (https://www.ita
+ lki.com/user/4994818)\nSkype: jcarloscuba3@hotmail.com\; josecarlos10301\n
+ URL: https://www.italki.com/lesson/session/2911119418
+LOCATION:italki.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:italki Lesson: english - Brandi Stephens
+DTSTART;VALUE=DATE-TIME:20200820T210000Z
+DTEND;VALUE=DATE-TIME:20200820T220000Z
+DTSTAMP;VALUE=DATE-TIME:20200819T133612Z
+UID:ITALKI_SESSION_4123171518
+DESCRIPTION:Session ID: 4123171518\nCourse /Service: What's your name? ( P
+ re Beg)\nTeacher: Brandi Stephens (https://www.italki.com/teacher/6223690)
+ \nSkype: MsTxLawyer\nURL: https://www.italki.com/lesson/session/4123171518
+LOCATION:italki.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:italki Lesson: portuguese - Erik
+DTSTART;VALUE=DATE-TIME:20200821T230000Z
+DTEND;VALUE=DATE-TIME:20200822T000000Z
+DTSTAMP;VALUE=DATE-TIME:20200819T133612Z
+UID:ITALKI_SESSION_3706113518
+DESCRIPTION:Session ID: 3706113518\nCourse /Service: Prática de Conversa
+ ção em Português Brasileiro.\nStudent: Erik (https://www.italki.com/use
+ r/4024705)\nSkype: erik_takehiko_adachi\nURL: https://www.italki.com/lesso
+ n/session/3706113518
+LOCATION:italki.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:italki Lesson: portuguese - Olusheun
+DTSTART;VALUE=DATE-TIME:20200821T000000Z
+DTEND;VALUE=DATE-TIME:20200821T010000Z
+DTSTAMP;VALUE=DATE-TIME:20200819T133612Z
+UID:ITALKI_SESSION_5844139518
+DESCRIPTION:Session ID: 5844139518\nCourse /Service: Prática de Conversa
+ ção em Português Brasileiro.\nStudent: Olusheun (https://www.italki.com
+ /user/6000975)\nSkype: melikebooks\nURL: https://www.italki.com/lesson/ses
+ sion/5844139518
+LOCATION:italki.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:italki Lesson: portuguese - Maciej
+DTSTART;VALUE=DATE-TIME:20200823T140000Z
+DTEND;VALUE=DATE-TIME:20200823T150000Z
+DTSTAMP;VALUE=DATE-TIME:20200819T133612Z
+UID:ITALKI_SESSION_5922192518
+DESCRIPTION:Session ID: 5922192518\nCourse /Service: Prática de Conversa
+ ção em Português Brasileiro.\nStudent: Maciej (https://www.italki.com/u
+ ser/7150025)\nSkype: 1ad5126ecaec2557\nURL: https://www.italki.com/lesson/
+ session/5922192518
+LOCATION:italki.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:italki Lesson: portuguese - Klaidas
+DTSTART;VALUE=DATE-TIME:20200819T230000Z
+DTEND;VALUE=DATE-TIME:20200820T000000Z
+DTSTAMP;VALUE=DATE-TIME:20200819T133612Z
+UID:ITALKI_SESSION_8013112618
+DESCRIPTION:Session ID: 8013112618\nCourse /Service: Prática de Conversa
+ ção em Português Brasileiro.\nStudent: Klaidas (https://www.italki.com/
+ user/5490461)\nSkype: snixas1\nURL: https://www.italki.com/lesson/session/
+ 8013112618
+LOCATION:italki.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:italki Lesson: portuguese - Kerri
+DTSTART;VALUE=DATE-TIME:20200824T233000Z
+DTEND;VALUE=DATE-TIME:20200825T003000Z
+DTSTAMP;VALUE=DATE-TIME:20200819T133612Z
+UID:ITALKI_SESSION_5091156618
+DESCRIPTION:Session ID: 5091156618\nCourse /Service: Prática de Conversa
+ ção em Português Brasileiro.\nStudent: Kerri (https://www.italki.com/us
+ er/6751264)\nSkype: +61407312232\nURL: https://www.italki.com/lesson/sessi
+ on/5091156618
+LOCATION:italki.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:italki Lesson: portuguese - Zuzanna Szczepanik
+DTSTART;VALUE=DATE-TIME:20200823T130000Z
+DTEND;VALUE=DATE-TIME:20200823T140000Z
+DTSTAMP;VALUE=DATE-TIME:20200819T133612Z
+UID:ITALKI_SESSION_4135106618
+DESCRIPTION:Session ID: 4135106618\nCourse /Service: Prática de Conversa
+ ção em Português Brasileiro.\nStudent: Zuzanna Szczepanik (https://www.
+ italki.com/user/7392085)\nSkype: zuzia.szczepanik@outlook.com\nURL: https:
+ //www.italki.com/lesson/session/4135106618
+LOCATION:italki.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:italki Lesson: portuguese - Daniel Maldonado
+DTSTART;VALUE=DATE-TIME:20200823T000000Z
+DTEND;VALUE=DATE-TIME:20200823T010000Z
+DTSTAMP;VALUE=DATE-TIME:20200819T133612Z
+UID:ITALKI_SESSION_4115187618
+DESCRIPTION:Session ID: 4115187618\nCourse /Service: Prática de Conversa
+ ção em Português Brasileiro.\nStudent: Daniel Maldonado (https://www.it
+ alki.com/user/6835191)\nSkype: daniel.maldonado.cruz\nURL: https://www.ita
+ lki.com/lesson/session/4115187618
+LOCATION:italki.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:italki Lesson: portuguese - Alejandro
+DTSTART;VALUE=DATE-TIME:20200824T003000Z
+DTEND;VALUE=DATE-TIME:20200824T013000Z
+DTSTAMP;VALUE=DATE-TIME:20200819T133612Z
+UID:ITALKI_SESSION_2420162618
+DESCRIPTION:Session ID: 2420162618\nCourse /Service: Prática de Conversa
+ ção em Português Brasileiro.\nStudent: Alejandro (https://www.italki.co
+ m/user/7418546)\nGoogle Hangouts: dodo555x@gmail.com\nURL: https://www.ita
+ lki.com/lesson/session/2420162618
+LOCATION:italki.com
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:italki Lesson: portuguese - Bai ta
+DTSTART;VALUE=DATE-TIME:20200824T113000Z
+DTEND;VALUE=DATE-TIME:20200824T123000Z
+DTSTAMP;VALUE=DATE-TIME:20200819T133612Z
+UID:ITALKI_SESSION_4466107618
+DESCRIPTION:Session ID: 4466107618\nCourse /Service: Prática de Conversa
+ ção em Português Brasileiro.\nStudent: Bai ta (https://www.italki.com/u
+ ser/4648801)\nSkype: Si_ta@hotmail.com\nURL: https://www.italki.com/lesson
+ /session/4466107618
+LOCATION:italki.com
+END:VEVENT
+END:VCALENDAR

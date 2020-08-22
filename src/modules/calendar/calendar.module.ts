@@ -1,16 +1,18 @@
+import { CalendarRepository } from './calendar.repository';
+import { Timezone, TimezoneSchema } from './../../domain/timezone.domain';
+import { MongooseModule } from '@nestjs/mongoose';
+import { CalendarService } from './calendar.service';
 import { CalendarController } from './calendar.controller';
 import { Module } from '@nestjs/common';
 
 @Module({
     imports: [
-    //   MongooseModule.forFeature([
-    //       { name: Aluno.name, schema: AlunoSchema },
-    //   ]),
-    //   PaisModule,
-    //   UsersModule,
+      MongooseModule.forFeature([
+          { name: Timezone.name, schema: TimezoneSchema },
+      ]),
     ],
     controllers: [CalendarController],
-    providers: [],
-    exports: []
+    providers: [CalendarService, CalendarRepository],
+    exports: [CalendarService]
   })
 export class CalendarModule {}

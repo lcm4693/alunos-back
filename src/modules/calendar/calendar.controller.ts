@@ -1,23 +1,47 @@
+import { Roles } from './../../roles.decorator';
+import { JwtAuthGuard } from './../auth/jwt-auth.guard';
+import { RolesSystem } from './../../constants/roles-system';
+import { CalendarService } from './calendar.service';
+import { Timezone } from './../../domain/timezone.domain';
 import { Aula } from './../../domain/aula.domain';
-import { Get, BadGatewayException, Controller } from '@nestjs/common';
+import { Get, BadGatewayException, Controller, Request, UseGuards } from '@nestjs/common';
 import * as ical from 'ical';
 const axios = require('axios');
 
 @Controller('calendar')
 export class CalendarController {
-  constructor() {}
+  constructor(private readonly service: CalendarService) {}
 
+  @Get('/gerarListaTimezone')
+  async gerarListaTimezone(): Promise<Timezone[]> {
+    const response = await axios.get('http://worldtimeapi.org/api/timezone');
+
+    this.service.insertTimezone(response.data);
+
+    return response.data;
+  }
+
+  @Get('/timezones')
+  async timezones(): Promise<Timezone[]> {
+    const retorno = this.service.getAll();
+    return retorno;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Roles(RolesSystem.ADMIN, RolesSystem.PROFESSOR)
   @Get('/list')
-  async gerarCalendario(): Promise<Aula[]> {
+  async gerarCalendario(@Request() req): Promise<Aula[]> {
     const retorno: Aula[] = [];
     try {
       const response = await axios.get(
         'https://www.italki.com/calendar/70gDdDaIgAW93Pxd4ORQAN/ics',
       );
 
-      const timezone = 'America/New_York';
-      const padrao24Horas = false;
+      const timezone = 'America/Sao_Paulo';
+      
+      const padrao24Horas = req.user.padrao24;
 
+      // const data = ical.parseFile('exemplo_ics.ics');
       const data = ical.parseICS(response.data);
       for (let k in data) {
         if (data.hasOwnProperty(k)) {
@@ -160,8 +184,9 @@ export class CalendarController {
     const hora = this.fillCaracteres(composicaoHora[0], '0', 2);
     const minuto = this.fillCaracteres(composicaoHora[1], '0', 2);
     const segundo = this.fillCaracteres(composicaoHora[2], '0', 2);
-    
-    const horaCompleta = hora + ':' + minuto + (padrao24 ? '' : ' ' + arrayHora[2]);
+
+    const horaCompleta =
+      hora + ':' + minuto + (padrao24 ? '' : ' ' + arrayHora[2]);
 
     return horaCompleta;
   }

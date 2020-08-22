@@ -1,3 +1,4 @@
+import { Aluno } from './../../domain/aluno.domain';
 import { Roles } from './../../roles.decorator';
 import { RolesGuard } from './../../roles.guard';
 import { EntradaUser } from '../../dto/entrada-user.dto';
@@ -9,7 +10,8 @@ import {
   Get,
   Post,
   Body,
-  SetMetadata,
+  Request,
+  Put,
 } from '@nestjs/common';
 import { RolesSystem } from 'src/constants/roles-system';
 
@@ -17,8 +19,8 @@ import { RolesSystem } from 'src/constants/roles-system';
 export class UsersController {
   constructor(private readonly service: UsersService) {}
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(RolesSystem.ADMIN)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(RolesSystem.ADMIN)
   @Post('/criar')
   async criar(@Body() user: EntradaUser) {
     const retorno = await this.service.inserir(user);
@@ -28,6 +30,14 @@ export class UsersController {
   @Post('/criarUser')
   async criarUser(@Body() user: EntradaUser) {
     const retorno = await this.service.inserir(user);
+    return retorno;
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RolesSystem.ADMIN, RolesSystem.PROFESSOR, RolesSystem.ALUNO)
+  @Put('/atualizar')
+  async atualizar(@Request() req, @Body() user: EntradaUser) {
+    const retorno = await this.service.atualizar(user, req.user);
     return retorno;
   }
 
